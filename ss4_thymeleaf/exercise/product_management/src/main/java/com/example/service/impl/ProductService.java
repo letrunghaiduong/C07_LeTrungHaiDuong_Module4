@@ -31,4 +31,9 @@ public class ProductService implements IProductService {
     public void update(int id, Product product) {
         iProductRepostory.update(id,product);
     }
+
+    @Override
+    public void remove(int id) {
+        iProductRepostory.remove(id);
+    }
 }

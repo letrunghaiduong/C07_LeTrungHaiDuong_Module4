@@ -36,4 +36,9 @@ public class ProductRepostory implements IProductRepostory {
     public void update(int id, Product product) {
         productList.add(id,product);
     }
+
+    @Override
+    public void remove(int id) {
+        productList.remove(id);
+    }
 }
