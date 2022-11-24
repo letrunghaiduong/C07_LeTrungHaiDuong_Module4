@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.model.Product;
 import com.example.service.IProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
-
 @Controller
 public class ProductController {
     @Autowired
     private IProductService iProductService;
+
     @GetMapping("")
     public String list(Model model){
         List<Product> productList = iProductService.findAll();
@@ -30,9 +31,10 @@ public class ProductController {
         return "create";
     }
     @PostMapping("/save")
-    public String save(Product product){
+    public String save(Product product,RedirectAttributes redirectAttributes){
         product.setId((int) (Math.random() * 10000));
         iProductService.save(product);
+        redirectAttributes.addFlashAttribute("mess","Add success");
         return "create";
     }
     @GetMapping("/edit")
@@ -45,16 +47,20 @@ public class ProductController {
         iProductService.update(product.getId(),product);
         return "list";
     }
-    @GetMapping("/{id}/delete")
-    public String delete(@PathVariable int id, Model model){
-        model.addAttribute("product",iProductService.findById(id));
-        return "product/delete";
+    @GetMapping("/delete")
+    public String delete(@RequestParam("deleteById") int deleteById ){
+        iProductService.remove(deleteById);
+        return "redirect:list";
     }
-
-    @PostMapping("/delete")
-    public String delete(Product product, RedirectAttributes redirectAttributes){
-        iProductService.remove(product.getId());
-        redirectAttributes.addFlashAttribute("mess","deleted");
+    @GetMapping("/view")
+    public String view(@RequestParam int id,Model model){
+        model.addAttribute("productList",iProductService.findById(id));
+        return "list";
+    }
+    @PostMapping("/search")
+    public String search(@RequestParam String search,Model model){
+        List<Product> productList=iProductService.findByName(search);
+        model.addAttribute("productList",productList);
         return "list";
     }
 }

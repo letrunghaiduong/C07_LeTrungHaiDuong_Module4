@@ -5,6 +5,10 @@
     <title>EDIT</title>
 </head>
 <body>
+<a th:href="@{/}">
+    Back to list
+</a>
+
 <form th:action="@{/update}" th:object="${product}"
       method="POST" novalidate="novalidate">
     <input type="hidden" th:field="*{id}"/>
@@ -18,7 +22,7 @@
     </div>
     <div>
         <label th:for="describe">Describe</label>
-        <input th:field="*{describe}"/>
+        <input th:field="*{description}"/>
     </div>
     <div>
         <label th:for="producer">Producer</label>

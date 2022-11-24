@@ -8,6 +8,7 @@
 <a th:href="@{/}">
     Back to list
 </a>
+<h1 th:text="${mess}"></h1>
 <div>
     <form th:action="@{/save}" th:object="${product}"
           method="POST" novalidate="novalidate">
@@ -22,7 +23,7 @@
         </div>
         <div>
             <label>Describe</label>
-            <input type="text" th:field="*{describe}"/>
+            <input type="text" th:field="*{description}"/>
         </div>
         <div>
             <label>Producer</label>

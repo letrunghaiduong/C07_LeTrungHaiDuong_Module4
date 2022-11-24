@@ -1,21 +1,27 @@
 package com.example.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
     private double price;
-    private String describe;
+    private String description;
     private String producer;
 
-    public Product(int id, String name, double price, String describe, String producer) {
+    public Product() {
+    }
+
+    public Product(int id, String name, double price, String description, String producer) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.describe = describe;
+        this.description = description;
         this.producer = producer;
-    }
-
-    public Product() {
     }
 
     public int getId() {
@@ -42,12 +48,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribe(String description) {
+        this.description = description;
     }
 
     public String getProducer() {
