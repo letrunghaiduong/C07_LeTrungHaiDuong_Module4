@@ -50,7 +50,7 @@ public class ProductController {
     @GetMapping("/delete")
     public String delete(@RequestParam("deleteById") int deleteById ){
         iProductService.remove(deleteById);
-        return "redirect:list";
+        return "redirect:";
     }
     @GetMapping("/view")
     public String view(@RequestParam int id,Model model){
@@ -59,7 +59,7 @@ public class ProductController {
     }
     @PostMapping("/search")
     public String search(@RequestParam String search,Model model){
-        List<Product> productList=iProductService.findByName(search);
+        List<Product> productList = iProductService.findByName(search);
         model.addAttribute("productList",productList);
         return "list";
     }

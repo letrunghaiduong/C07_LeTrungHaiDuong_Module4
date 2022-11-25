@@ -7,7 +7,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1>List Product</h1>
+<a th:href="@{/}" class="btn btn-primary">List Product</a>
 
 <a th:href="@{/create}" class="btn btn-primary">ADD Product</a>
 <form th:action="@{/search}" th:method="post" class="d-flex">
@@ -45,7 +45,7 @@
             </button>
         </td>
         <td>
-            <a th:href="@{/edit(id=${product.id})}" class="btn btn-primary">View</a>
+            <a th:href="@{/view(id=${product.id})}" class="btn btn-primary">View</a>
         </td>
     </tr>
     </tbody>
