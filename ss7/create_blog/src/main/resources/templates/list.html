@@ -11,6 +11,12 @@
 <h1>Blog</h1>
 
 <a th:href="@{/create}" class="btn btn-primary">Create new blog</a>
+<form class="d-flex">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <button class="btn btn-outline-success" type="submit">
+        Search
+    </button>
+</form>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
@@ -21,6 +27,7 @@
         <th>Content</th>
         <th>Date Of Writing</th>
         <th>Author</th>
+        <th>Category</th>
         <th>Edit</th>
         <th>Delete</th>
         <th>View</th>
@@ -32,6 +39,7 @@
             <td th:text="${blog.content}"></td>
             <td th:text="${blog.dateOfWriting}"></td>
             <td th:text="${blog.author}"></td>
+            <td th:text="${blog.category.name}"></td>
             <td>
                 <a th:href="@{/edit(id=${blog.id})}" class="btn btn-primary">Edit</a>
             </td>
@@ -47,12 +55,15 @@
         </tr>
     </th:block>
 </table>
-
+<!--    Phân trang-->
+<a th:href="@{/(page=${listBlog.number - 1})}" th:if="${listBlog.hasPrevious()}">Previous</a>
+<span th:text="${listBlog.number + 1}+'/'+${listBlog.totalPages}"></span>
+<a th:href="@{/(page=${listBlog.number + 1})}" th:if="${listBlog.hasNext()}">Next</a>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modal delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -71,6 +82,7 @@
         </div>
     </div>
 </div>
+
 <script th:inline="javascript">
     function deleteById(id, name) {
         console.log("deleteById" + id);

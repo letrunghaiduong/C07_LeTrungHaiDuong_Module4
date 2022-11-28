@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<a th:href="@{/}">Back to list</a>
+<h1>Edit</h1>
+
+<a th:href="@{/}" class="btn btn-primary">Back to list</a>
+
 <form th:action="@{/edit}" th:object="${blog}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <pre>Blog name:       <input type="text" th:field="*{name}"/></pre>
     <pre>Content  :       <input type="text" th:field="*{content}"/></pre>
     <pre>Date Of Writing: <input type="date" th:field="*{dateOfWriting}"/></pre>
     <pre>Author:          <input type="text" th:field="*{author}"/></pre>
+    <pre>Category:        <select th:field="*{category}">
+                          <option th:each="category:${categoryList}" th:value="${category.id}" th:text="${category.name}"></option>
+                          </select>
+    </pre>
     <input type="submit" value="Update">
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

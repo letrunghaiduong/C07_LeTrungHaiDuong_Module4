@@ -2,7 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Blog;
 import com.example.demo.service.IBlogService;
+import com.example.demo.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +19,17 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
+    @Autowired
+    private ICategoryService categoryService;
+
     @GetMapping("")
-    public String listBlog(Model model) {
-        model.addAttribute("listBlog", blogService.findAll());
+    public String listBlog(@RequestParam(defaultValue = "") String search ,@PageableDefault(page = 0,size = 5) Pageable pageable, Model model) {
+        model.addAttribute("listBlog", blogService.searchNameAndContent(search,pageable));
         return "list";
     }
     @GetMapping("/create")
     public String create(Model model) {
+        model.addAttribute("categoryList",categoryService.findAll());
         model.addAttribute("blog", new Blog());
         return "create";
     }
@@ -34,6 +41,7 @@ public class BlogController {
     }
     @GetMapping("/edit")
     public String showEditForm(@RequestParam Integer id, Model model) {
+        model.addAttribute("categoryList",categoryService.findAll());
         model.addAttribute("blog", blogService.findById(id));
         return "edit";
     }
@@ -53,6 +61,7 @@ public class BlogController {
 
     @GetMapping("/view")
     public String view(@RequestParam Integer id, Model model){
+        model.addAttribute("categoryList",categoryService.findAll());
         model.addAttribute("blog", blogService.findById(id));
         return "view";
     }

@@ -17,7 +17,27 @@ public class Blog {
     private String dateOfWriting;
     private String author;
 
+    @ManyToOne
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Blog() {
+    }
+
+    public Blog(Integer id, String name, String content, String dateOfWriting, String author, Category category) {
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.dateOfWriting = dateOfWriting;
+        this.author = author;
+        this.category = category;
     }
 
     public Blog(Integer id, String name, String content, String dateOfWriting, String author) {
