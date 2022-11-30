@@ -11,7 +11,7 @@
 
 <a th:href="@{/}" class="btn btn-primary">Back to list</a>
 
-<form th:action="@{/edit}" th:object="${song}" method="post">
+<form th:action="@{/edit}" th:object="${songDto}" method="post">
     <input th:type="hidden" name="id" th:field="*{id}">
     <pre>Name:        <input type="text" th:field="*{name}"/></pre>
     <p th:errors = "*{name}" class="text-danger"></p>

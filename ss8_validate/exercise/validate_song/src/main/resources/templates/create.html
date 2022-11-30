@@ -14,7 +14,7 @@
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/create}" th:object="${song}" method="post">
+<form th:action="@{/create}" th:object="${songDto}" method="post">
     <pre>Name:        <input type="text" th:field="*{name}"/></pre>
     <p th:errors = "*{name}" class="text-danger"></p>
     <pre>Artist  :       <input type="text" th:field="*{artist}"/></pre>

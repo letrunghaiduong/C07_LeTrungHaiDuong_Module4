@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.SongDto;
 import com.example.demo.model.Song;
 import com.example.demo.service.ISongService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,28 +28,35 @@ public class SongController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("song", new Song());
+        model.addAttribute("songDto", new SongDto());
         return "create";
     }
 
     @PostMapping("/create")
-    public String save(@Validated @ModelAttribute("song") Song song, BindingResult bindingResult,
+    public String save(@Validated @ModelAttribute("songDto") SongDto songDto, BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()){
             return "create";
         }
+        Song song = new Song();
+        BeanUtils.copyProperties(songDto,song);
         songService.save(song);
         redirectAttributes.addFlashAttribute("message", "New song created successfully");
         return "redirect:/create";
     }
     @GetMapping("/edit")
     public String showEditForm(@RequestParam Integer id, Model model) {
-        model.addAttribute("song", songService.findById(id));
+        model.addAttribute("songDto", songService.findById(id));
         return "edit";
     }
 
     @PostMapping("/edit")
-    public String updateSong(@ModelAttribute("song") Song song, RedirectAttributes redirectAttributes) {
+    public String updateSong(@Validated @ModelAttribute("songDto") SongDto songDto,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()){
+            return "edit";
+        }
+        Song song = new Song();
+        BeanUtils.copyProperties(songDto,song);
         songService.save(song);
         redirectAttributes.addFlashAttribute("message", "Edit successfully");
         return "redirect:/";

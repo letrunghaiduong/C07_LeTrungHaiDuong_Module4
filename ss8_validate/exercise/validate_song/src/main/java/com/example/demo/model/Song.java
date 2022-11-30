@@ -19,19 +19,19 @@ public class Song{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 800,message = "Không được quá 800 ký tự")
-    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
+//    @NotEmpty(message = "Không được để trống")
+//    @Size(max = 800,message = "Không được quá 800 ký tự")
+//    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
     private String name;
 
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 300,message = "Không được quá 300 ký tự")
-    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
+//    @NotEmpty(message = "Không được để trống")
+//    @Size(max = 300,message = "Không được quá 300 ký tự")
+//    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
     private String artist;
 
-    @NotEmpty(message = "Không được để trống")
-    @Size(max = 1000,message = "Không được quá 1000 ký tự")
-    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
+//    @NotEmpty(message = "Không được để trống")
+//    @Size(max = 1000,message = "Không được quá 1000 ký tự")
+//    @Pattern(regexp = "^([A-Z0-9][a-z0-9]+[ ])+([A-Z0-9][a-z0-9]+)$", message = "{invalid}")
     private String kindOfMusic;
 
     public Song(String name, String artist, String kindOfMusic) {
