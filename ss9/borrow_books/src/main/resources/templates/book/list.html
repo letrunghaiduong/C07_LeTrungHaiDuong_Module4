@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book table</title>
+</head>
+<style>
+    table th, td{
+        border: solid black 1px;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+<span>
+    <a href="/create">Tạo mới</a>
+    <a href="/order">Danh sách thuê</a>
+</span>
+<form action="/give-book-back" method="get">
+    <label for="code">
+        <input type="text" name="code" id="code">
+    </label>
+    <button type="submit">Trả sách</button>
+</form>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Số lượng còn lại</th>
+        <th>Tổng số</th>
+        <th>Thuê</th>
+        <th>Chi tiết</th>
+        <th>Sửa</th>
+        <th>Xoá</th>
+    </tr>
+    <tr th:each="book, status : ${bookList}">
+        <td th:text="${status.count}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.quantityAvailable}"></td>
+        <td th:text="${book.totalQuantity}"></td>
+        <td><a th:href="@{/order/__${book.id}__}">Thuê</a></td>
+        <td><a th:href="@{/detail/__${book.id}__}">Chi tiết</a></td>
+        <td><a th:href="@{/edit/__${book.id}__}">Sửa</a></td>
+        <td><a th:href="@{/remove/__${book.id}__}">Xoá</a></td>
+    </tr>
+</table>
+<p th:if="${mess != null}" th:text="${mess}"></p>
+<p th:if="${code != null}" th:text="'Your brorrow code is: ' + ${code}"></p>
+</body>
+</html>
