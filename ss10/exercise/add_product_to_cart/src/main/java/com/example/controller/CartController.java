@@ -17,6 +17,7 @@ public class CartController {
     }
     @GetMapping("pay")
     public String remove(@SessionAttribute("cart")CartDto cart, RedirectAttributes redirectAttributes){
+
         cart.clear();
         redirectAttributes.addFlashAttribute("mess", "Pay successfully");
         return "redirect:/shop";
