@@ -17,9 +17,9 @@ public class CartController {
     }
     @GetMapping("pay")
     public String remove(@SessionAttribute("cart")CartDto cart, RedirectAttributes redirectAttributes){
-
+        Double total = cart.countTotalPayment();
         cart.clear();
-        redirectAttributes.addFlashAttribute("mess", "Pay successfully");
+        redirectAttributes.addFlashAttribute("mess","Tổng tiền: "+ total);
         return "redirect:/shop";
     }
 }

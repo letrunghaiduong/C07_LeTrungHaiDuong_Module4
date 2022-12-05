@@ -27,4 +27,11 @@ public class CartDto {
     public void clear(){
         productMap.clear();
     }
+    public Double countTotalPayment() {
+        Double total = 0.0;
+        for (Map.Entry<ProductDto, Integer> entry : productMap.entrySet()) {
+            total = total + entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
+    }
 }
