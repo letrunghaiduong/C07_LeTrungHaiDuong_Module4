@@ -31,7 +31,7 @@ public class BlogController {
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
 
-    @GetMapping("/findByCategory/{category}")
+    @GetMapping("/find-by-category/{category}")
     public ResponseEntity<Iterable<Blog>> findByCategory(@PathVariable("category") Category category,@PageableDefault(page = 0,size = 3) Pageable pageable){
         Page<Blog> blogs = blogService.findByCategory(category,pageable);
         if (blogs.isEmpty()){
