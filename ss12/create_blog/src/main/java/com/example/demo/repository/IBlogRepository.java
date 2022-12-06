@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
 
 public interface IBlogRepository extends JpaRepository<Blog,Integer> {
     Page<Blog> findByCategory (Category category, Pageable pageable);
-    Page<Blog> findByNameContaining(String name,Pageable pageable);
 }

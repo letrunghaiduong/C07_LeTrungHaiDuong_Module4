@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("blogs")
 @RestController
-@CrossOrigin("*")
 public class BlogController {
     @Autowired
     private IBlogService blogService;
@@ -28,7 +27,6 @@ public class BlogController {
         }
         return new ResponseEntity<>(blogList, HttpStatus.OK);
     }
-
 
     @GetMapping("/find-by-category/{category}")
     public ResponseEntity<Iterable<Blog>> findByCategory(@PathVariable("category") Category category,@PageableDefault(page = 0,size = 3) Pageable pageable){
@@ -49,14 +47,4 @@ public class BlogController {
         return new ResponseEntity<>(blog, HttpStatus.OK);
     }
 
-
-    @GetMapping("/search-by-name/{nameSearch}")
-    public ResponseEntity findByName(@PathVariable("nameSearch") String name,
-                                     @PageableDefault(page = 0,size = 3) Pageable pageable){
-        Page<Blog> blog = blogService.findByNameContaining(name,pageable);
-        if (blog == null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(blog, HttpStatus.OK);
-    }
 }
