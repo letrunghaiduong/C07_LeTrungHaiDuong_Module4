@@ -15,11 +15,15 @@ public class Customer {
     private String email;
     private String address;
 
+    @Column(columnDefinition = "bit default false")
+    private boolean checkDelete;
+
     @ManyToOne
     private CustomerType customerType;
 
-    public Customer(int id, String name, String dateOfBirth, String gender, String idCard,
-                    String phoneNumber, String email, String address, CustomerType customerType) {
+    public Customer(int id, String name, String dateOfBirth, String gender,
+                    String idCard, String phoneNumber, String email, String address,
+                    boolean checkDelete, CustomerType customerType) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -28,30 +32,11 @@ public class Customer {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+        this.checkDelete = checkDelete;
         this.customerType = customerType;
-    }
-
-    public Customer(int id, String name, String dateOfBirth, String gender, String idCard,
-                    String phoneNumber, String email, String address) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.idCard = idCard;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.address = address;
     }
 
     public Customer() {
-    }
-
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
     }
 
     public int getId() {
@@ -61,7 +46,6 @@ public class Customer {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
@@ -119,4 +103,19 @@ public class Customer {
         this.address = address;
     }
 
+    public boolean isCheckDelete() {
+        return checkDelete;
+    }
+
+    public void setCheckDelete(boolean checkDelete) {
+        this.checkDelete = checkDelete;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
+    }
 }

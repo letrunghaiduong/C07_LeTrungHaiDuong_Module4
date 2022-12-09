@@ -7,51 +7,54 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<h1>Customer</h1>
+<div style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
+background-repeat: no-repeat; background-size: 100%; min-height: 100vh">
 
-<a th:href="@{customer/create}" class="btn btn-primary">Create new customer</a>
+    <h1>Customer</h1>
 
-<form class="d-flex" style="width: 30%; float: right">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-    <button class="btn btn-outline-success" type="submit">
-        Search
-    </button>
-</form>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<table class="table table-success table-striped">
-    <tr>
-        <th>STT</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Address</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    <th:block th:each="customer, varStatus : ${customerList}">
-        <tr>
-            <td th:text="${varStatus.count}"></td>
-            <td th:text="${customer.getName()}"></td>
-            <td th:if="${customer.getGender()} == 1" >Nam</td>
-            <td th:if="${customer.getGender()} == 0" >Nữ</td>
-            <td th:text="${customer.getAddress()}"></td>
-            <td>
-                <a th:href="@{/customer/edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
-            </td>
-            <td>
-                <button th:attr="onclick='deleteById('+${customer.id}+',\''+${customer.name}+'\')'" type="button"
-                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Delete
-                </button>
-            </td>
-        </tr>
+    <a th:href="@{/customer/create}" class="btn btn-primary">Create new customer</a>
+
+    <form class="d-flex" style="width: 30%; float: right">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+        <button class="btn btn-outline-success" type="submit">
+            Search
+        </button>
+    </form>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
     </th:block>
-</table>
-<a th:href="@{/customer/(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
-<span th:text="${customerList.number + 1}+'/'+${customerList.totalPages}"></span>
-<a th:href="@{/customer/(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
-
+    <table class="table table-success table-striped" style="margin-top: 100px">
+        <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <th:block th:each="customer, varStatus : ${customerList}">
+            <tr>
+                <td th:text="${varStatus.count}"></td>
+                <td th:text="${customer.getName()}"></td>
+                <td th:if="${customer.getGender()} == 1">Nam</td>
+                <td th:if="${customer.getGender()} == 0">Nữ</td>
+                <td th:text="${customer.getAddress()}"></td>
+                <td>
+                    <a th:href="@{/customer/edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <button th:attr="onclick='deleteById('+${customer.id}+',\''+${customer.name}+'\')'" type="button"
+                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+    <a th:href="@{/customer/(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
+    <span th:text="${customerList.number + 1}+'/'+${customerList.totalPages}"></span>
+    <a th:href="@{/customer/(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
+</div>
 <!--modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -86,6 +89,7 @@
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
