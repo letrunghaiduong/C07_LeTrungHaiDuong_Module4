@@ -1,4 +1,4 @@
-package dto;
+package com.casestudy.dto;
 
 import com.casestudy.model.customer.CustomerType;
 

@@ -16,9 +16,9 @@
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
-                            <a th:href="@{/customer}" class="btn btn-primary">Back to list</a>
+                            <a th:href="@{/customer}" class="btn btn-outline-primary">Back to list</a>
 
-                            <h2 class="text-uppercase text-center mb-5">Edit</h2>
+                            <h2 class="text-uppercase text-center mb-5">Create new customer</h2>
                             <form th:action="@{/customer/save}" th:object="${customer}" method="post">
                                 <div class="form-outline mb-4">
                                     <input type="text" th:field="*{name}" class="form-control form-control-lg" />
@@ -42,7 +42,7 @@
                                 <div class="form-outline mb-4">
                                     <input type="text" th:field="*{idCard}" class="form-control form-control-lg" />
                                     <label class="form-label">Id Card</label>
-                                    <p th:errors = "*{idCard}" class="text-danger"></p></pre>
+                                    <p th:errors = "*{idCard}" class="text-danger"></p>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <input type="text" th:field="*{phoneNumber}"  class="form-control form-control-lg" />
@@ -71,7 +71,7 @@
 
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
-                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Update</button>
+                                            class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Save</button>
                                 </div>
                             </form>
 

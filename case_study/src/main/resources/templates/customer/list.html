@@ -9,7 +9,6 @@
 <body>
 <div style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
 background-repeat: no-repeat; background-size: 100%; min-height: 100vh">
-
     <h1>Customer</h1>
 
     <a th:href="@{/customer/create}" class="btn btn-primary">Create new customer</a>
@@ -20,40 +19,58 @@ background-repeat: no-repeat; background-size: 100%; min-height: 100vh">
             Search
         </button>
     </form>
-    <th:block th:if="${message}">
-        <p th:text="${message}"></p>
-    </th:block>
-    <table class="table table-success table-striped" style="margin-top: 100px">
-        <tr>
-            <th>STT</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Address</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        <th:block th:each="customer, varStatus : ${customerList}">
-            <tr>
-                <td th:text="${varStatus.count}"></td>
-                <td th:text="${customer.getName()}"></td>
-                <td th:if="${customer.getGender()} == 1">Nam</td>
-                <td th:if="${customer.getGender()} == 0">Nữ</td>
-                <td th:text="${customer.getAddress()}"></td>
-                <td>
-                    <a th:href="@{/customer/edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
-                </td>
-                <td>
-                    <button th:attr="onclick='deleteById('+${customer.id}+',\''+${customer.name}+'\')'" type="button"
-                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Delete
-                    </button>
-                </td>
-            </tr>
-        </th:block>
-    </table>
-    <a th:href="@{/customer/(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
-    <span th:text="${customerList.number + 1}+'/'+${customerList.totalPages}"></span>
-    <a th:href="@{/customer/(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <th:block th:if="${message}">
+                <p th:text="${message}"></p>
+            </th:block>
+            <table class="table table-success table-striped" style="margin-top: 100px">
+                <tr>
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Id Card</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Phone Number</th>
+                    <th>Customer Type</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <th:block th:each="customer, varStatus : ${customerList}">
+                    <tr>
+                        <td th:text="${varStatus.count}"></td>
+                        <td th:text="${customer.name}"></td>
+                        <td th:if="${customer.gender} == 1">Nam</td>
+                        <td th:if="${customer.gender} == 0">Nữ</td>
+                        <td th:text="${customer.idCard}"></td>
+                        <td th:text="${customer.email}"></td>
+                        <td th:text="${customer.address}"></td>
+                        <td th:text="${customer.phoneNumber}"></td>
+                        <td th:text="${customer.customerType.name}"></td>
+                        <td>
+                            <a th:href="@{/customer/edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
+                        </td>
+                        <td>
+                            <button th:attr="onclick='deleteById('+${customer.id}+',\''+${customer.name}+'\')'"
+                                    type="button"
+                                    class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+            <a th:href="@{/customer/(page=${customerList.number - 1})}"
+               th:if="${customerList.hasPrevious()}" class="btn btn-outline-success">Previous</a>
+            <span th:text="${customerList.number + 1}+'/'+${customerList.totalPages}"></span>
+            <a th:href="@{/customer/(page=${customerList.number + 1})}"
+               th:if="${customerList.hasNext()}"class="btn btn-outline-success">Next</a>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 <!--modal-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

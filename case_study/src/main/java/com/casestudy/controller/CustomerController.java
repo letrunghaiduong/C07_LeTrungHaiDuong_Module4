@@ -3,7 +3,7 @@ package com.casestudy.controller;
 import com.casestudy.model.customer.Customer;
 import com.casestudy.service.customer.ICustomerService;
 import com.casestudy.service.customer.ICustomerTypeService;
-import dto.CustomerDTO;
+import com.casestudy.dto.CustomerDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -25,8 +25,8 @@ public class CustomerController {
     private ICustomerTypeService customerTypeService;
 
     @GetMapping("")
-    public String customerList(Model model, @PageableDefault(page = 0,size = 3) Pageable pageable){
-        model.addAttribute("customerList", customerService.finAllCustomer(pageable));
+    public String customerList(Model model, @PageableDefault(page = 0,size = 5) Pageable pageable){
+        model.addAttribute("customerList", customerService.findAll(pageable));
         model.addAttribute("customerTypeList", customerTypeService.findAll());
         return "customer/list";
     }

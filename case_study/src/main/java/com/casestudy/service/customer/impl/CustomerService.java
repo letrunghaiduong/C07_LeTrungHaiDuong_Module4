@@ -1,9 +1,9 @@
 package com.casestudy.service.customer.impl;
 
+import com.casestudy.dto.CustomerDTO;
 import com.casestudy.model.customer.Customer;
 import com.casestudy.repository.customer.ICustomerRepository;
 import com.casestudy.service.customer.ICustomerService;
-import dto.ICustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,13 +18,8 @@ public class CustomerService implements ICustomerService {
     private ICustomerRepository customerRepository;
 
     @Override
-    public List<Customer> findAll() {
-        return customerRepository.findAll();
-    }
-
-    @Override
-    public Page<ICustomerDTO> finAllCustomer(Pageable pageable) {
-        return customerRepository.finAllCustomer(pageable);
+    public Page<Customer> findAll(Pageable pageable) {
+        return customerRepository.findAll(pageable);
     }
 
     @Override
