@@ -1,15 +1,15 @@
-package com.casestudy.model.facility;
+package com.casestudy.dto;
 
 import com.casestudy.model.contract.Contract;
+import com.casestudy.model.facility.FacilityType;
+import com.casestudy.model.facility.RentType;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.Set;
 
-@Entity
-public class Facility {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FacilityDTO {
     private Long id;
 
     private String name;
@@ -20,14 +20,9 @@ public class Facility {
 
     private int maxPeople;
 
-    @ManyToOne
     private FacilityType facilityType;
 
-    @ManyToOne
     private RentType rentType;
-
-    @OneToMany(mappedBy = "facility")
-    private Set<Contract> contracts;
 
     private String standardRoom;
 
@@ -37,30 +32,9 @@ public class Facility {
 
     private int numberOfFloors;
 
-    @Column(columnDefinition = "text")
     private String facilityFree;
 
-    @Column(columnDefinition = "bit default true")
-    private boolean flagDelete;
-
-    public Facility() {
-    }
-
-    public Facility(Long id, String name, int area, double cost, int maxPeople, FacilityType facilityType, RentType rentType, Set<Contract> contracts, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, String facilityFree, boolean flagDelete) {
-        this.id = id;
-        this.name = name;
-        this.area = area;
-        this.cost = cost;
-        this.maxPeople = maxPeople;
-        this.facilityType = facilityType;
-        this.rentType = rentType;
-        this.contracts = contracts;
-        this.standardRoom = standardRoom;
-        this.descriptionOtherConvenience = descriptionOtherConvenience;
-        this.poolArea = poolArea;
-        this.numberOfFloors = numberOfFloors;
-        this.facilityFree = facilityFree;
-        this.flagDelete = flagDelete;
+    public FacilityDTO() {
     }
 
     public Long getId() {
@@ -95,12 +69,12 @@ public class Facility {
         this.cost = cost;
     }
 
-    public int getmaxPeople() {
+    public int getMaxPeople() {
         return maxPeople;
     }
 
-    public void setmaxPeople(int maxPeoPel) {
-        this.maxPeople = maxPeoPel;
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
     public FacilityType getFacilityType() {
@@ -117,14 +91,6 @@ public class Facility {
 
     public void setRentType(RentType rentType) {
         this.rentType = rentType;
-    }
-
-    public Set<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(Set<Contract> contracts) {
-        this.contracts = contracts;
     }
 
     public String getStandardRoom() {
@@ -165,13 +131,5 @@ public class Facility {
 
     public void setFacilityFree(String facilityFree) {
         this.facilityFree = facilityFree;
-    }
-
-    public boolean isFlagDelete() {
-        return flagDelete;
-    }
-
-    public void setFlagDelete(boolean flagDelete) {
-        this.flagDelete = flagDelete;
     }
 }

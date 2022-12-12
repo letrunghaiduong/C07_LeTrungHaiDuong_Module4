@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
-    @Query(value = "select c.id, c.customer_type_id as customerTypeId, c.name ,c.date_of_birth as dateOfBirth,c.phone_number as phoneNumber,c.email,c.gender from customer as c where (c.name like concat('%',:name,'%') or c.email like concat('%',:email,'%') or c.customer_type_id like concat ('%',:customerTypeId,'%') )"
-            , countQuery = "select c.id, c.customer_type_id as customerTypeId, c.name ,c.date_of_birth as dateOfBirth,c.phone_number as phoneNumber,c.email,c.gender from customer as c where  (  c.name like concat('%',:name,'%') or c.email like concat('%',:email,'%') or c.customer_type_id like concat ('%',:customerTypeId,'%'))"
+    @Query(value = "select * from customer as c where  (c.name like concat('%',:name,'%') and c.email like concat('%',:email,'%') and c.customer_type_id like concat ('%',:customerTypeId,'%') )"
+            , countQuery = "select * from customer as c where  (c.name like concat('%',:name,'%') and c.email like concat('%',:email,'%') and c.customer_type_id like concat ('%',:customerTypeId,'%') )"
             , nativeQuery = true)
-    Page<CustomerDTO> searchCustomer(@Param("name") String name, @Param("email") String email, @Param("customerTypeId") String customerTypeId, Pageable pageable);
+    Page<Customer> searchCustomer(@Param("name") String name, @Param("email") String email, @Param("customerTypeId") String customerTypeId, Pageable pageable);
 }

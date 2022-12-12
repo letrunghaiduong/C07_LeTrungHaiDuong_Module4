@@ -32,7 +32,7 @@ public class CustomerDTO {
     private String email;
 
     @NotBlank(message = "{NotBlank}")
-    @Pattern(regexp = "^[0-9]{1,3}[ ]\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)*$",message = "{Address}")
+    @Pattern(regexp = "^[0-9]{0,3}[ ]?\\p{Lu}\\p{Ll}+(\\s\\p{Lu}\\p{Ll}+)*$",message = "{Address}")
     private String address;
 
     public CustomerDTO() {

@@ -6,6 +6,7 @@ import com.casestudy.service.customer.ICustomerTypeService;
 import com.casestudy.dto.CustomerDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,19 @@ public class CustomerController {
     private ICustomerTypeService customerTypeService;
 
     @GetMapping("")
-    public String customerList(Model model, @PageableDefault(page = 0,size = 5) Pageable pageable){
-        model.addAttribute("customerList", customerService.findAll(pageable));
+    public String customerList(@PageableDefault(page = 0,size = 4) Pageable pageable,
+                               @RequestParam( required = false, defaultValue = "") String name,
+                               @RequestParam( required = false, defaultValue = "") String email,
+                               @RequestParam( required = false, defaultValue = "") String customerTypeId,
+                               Model model){
+        Page<Customer> customerList =customerService.searchCustomer(name,email,customerTypeId,pageable);
         model.addAttribute("customerTypeList", customerTypeService.findAll());
+        model.addAttribute("customerList",customerList);
+        model.addAttribute("name",name);
+        model.addAttribute("email",email);
+        model.addAttribute("customerTypeId",customerTypeId);
+//        model.addAttribute("customerList", customerService.findAll(pageable));
+
         return "customer/list";
     }
 
@@ -51,7 +62,7 @@ public class CustomerController {
 
         BeanUtils.copyProperties(customerDTO,customer);
         customerService.save(customer);
-        redirectAttributes.addFlashAttribute("mess","Create new customer SussesFully");
+        redirectAttributes.addFlashAttribute("message","Create new customer SussesFully");
         return "redirect:/customer";
     }
 
