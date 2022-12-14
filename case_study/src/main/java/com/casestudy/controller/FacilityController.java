@@ -42,7 +42,7 @@ public class FacilityController {
                            @RequestParam( required = false, defaultValue = "") String name,
                            @RequestParam( required = false, defaultValue = "") String facilityType) {
 
-        Page<Facility> facilityPage =facilityService.searchFacility(name,facilityType,pageable);
+        Page<Facility> facilityPage = facilityService.searchFacility(name,facilityType,pageable);
         model.addAttribute("facilityTypeList", facilityTypeService.findAll());
         model.addAttribute("facilityPage",facilityPage);
         model.addAttribute("name",name);

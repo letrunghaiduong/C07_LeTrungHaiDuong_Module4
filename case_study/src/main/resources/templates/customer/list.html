@@ -40,7 +40,7 @@
                     <li><a class="navbar-brand" href="#">Employee</a></li>
                     <li><a class="navbar-brand" href="/customer">Customer</a></li>
                     <li><a class="navbar-brand" href="/facility">Service</a></li>
-                    <li><a class="navbar-brand" href="#">Contract</a></li>
+                    <li><a class="navbar-brand" href="/contract">Contract</a></li>
                 </ul>
             </div>
             <div class="col-md-5">
@@ -86,7 +86,7 @@ background-repeat: no-repeat; background-size: 100%; min-height: 100vh">
                 </tr>
                 <th:block th:each="customer, varStatus : ${customerList}">
                     <tr>
-                        <td th:text="${varStatus.count}"></td>
+                        <td th:text="${varStatus.count}+${customerList.number}*${customerList.size}"></td>
                         <td th:text="${customer.name}"></td>
                         <td th:if="${customer.gender} == 1">Nam</td>
                         <td th:if="${customer.gender} == 0">Nữ</td>

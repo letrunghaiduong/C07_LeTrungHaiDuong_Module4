@@ -25,12 +25,9 @@
                             <form th:action="@{/facility/update}" th:object="${facility}" method="post">
                                 <input th:type="hidden" name="id" th:field="*{id}">
                                 <div class="form-outline mb-4">
-                                    <select style="width: 300px" th:field="*{facilityType}" class="form-select"
-                                            id="facilityTypes">
-                                        <option th:each="facilityType: ${facilityTypeList}"
-                                                th:value="${facilityType.id}"
-                                                th:text="${facilityType.name}"></option>
-                                    </select>
+                                    <input type="hidden" style="width: 300px" th:field="*{facilityType.id}" class="form-select"
+                                            id="facilityTypes"/>
+                                    <input th:field="*{facilityType.name}" class="form-select" style="width: 300px" readonly>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <input type="text" th:field="*{name}" class="form-control form-control-lg"/>
@@ -150,8 +147,6 @@
                 $("#facilityFrees").show()
             }
         });
-
-
     })
 
 

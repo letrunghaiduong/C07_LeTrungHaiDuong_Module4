@@ -44,12 +44,13 @@
                     <li><a class="navbar-brand" href="#">Employee</a></li>
                     <li><a class="navbar-brand" href="/customer">Customer</a></li>
                     <li><a class="navbar-brand" href="/facility">Service</a></li>
-                    <li><a class="navbar-brand" href="#">Contract</a></li>
+                    <li><a class="navbar-brand" href="/contract">Contract</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <form class="d-flex" style="text-align: center">
-                    <input style="width: 300px" class="form-control me-2" name="name" type="search" placeholder="Search by name" aria-label="Search">
+                    <input style="width: 300px" class="form-control me-2" name="name" type="search"
+                           placeholder="Search by name" aria-label="Search">
                     <select style="width: 300px" class="form-select" name="facilityType">
                         <option th:value="${''}">Facility Type</option>
                         <option th:each="facilityType: ${facilityTypeList}"
@@ -62,88 +63,90 @@
         </nav>
     </div>
 </div>
-<h1 class="text-center">Facility</h1>
-<th:block th:if="${message}">
-    <h3 th:text="${message}"></h3>
-</th:block>
-<a th:href="@{/facility/create}" class="btn btn-success">Create new facility</a>
-<br>
-<div>
-    <table class="table table-success table-striped " style="margin-top: 50px">
-        <tr>
-            <th>STT</th>
-            <th>Facility Type</th>
-            <th>Name</th>
-            <th>Area</th>
-            <th>Cost</th>
-            <th>Max People</th>
-            <th>Standard Room</th>
-            <th>Description Other Convenience</th>
-            <th>Pool Area</th>
-            <th>Number Of Floors</th>
-            <th>Facility Free</th>
-            <th>Rent Type</th>
-            <th colspan="2">Action</th>
-        </tr>
-        <th:block th:each="facility, varStatus : ${facilityPage}">
+<div style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');
+background-repeat: no-repeat; background-size: 100%; min-height: 100vh">
+    <h1 class="text-center">Facility</h1>
+    <th:block th:if="${message}">
+        <h3 th:text="${message}"></h3>
+    </th:block>
+    <a th:href="@{/facility/create}" class="btn btn-success">Create new facility</a>
+    <br>
+    <div>
+        <table class="table table-success table-striped " style="margin-top: 50px">
             <tr>
-                <td th:text="${varStatus.count}"></td>
-                <td th:text="${facility.facilityType.name}"></td>
-                <td th:text="${facility.name}"></td>
-                <td th:text="${facility.area}"></td>
-                <td th:text="${facility.cost}"></td>
-                <td th:text="${facility.getmaxPeople()}"></td>
-                <td th:text="${facility.standardRoom}"></td>
-                <td th:text="${facility.descriptionOtherConvenience}"></td>
-                <td th:text="${facility.poolArea}"></td>
-                <td th:text="${facility.numberOfFloors}"></td>
-                <td th:text="${facility.facilityFree}"></td>
-                <td th:text="${facility.rentType.name}"></td>
-                <td>
-                    <a th:href="@{/facility/edit(id=${facility.id})}" class="btn btn-outline-success">Edit</a>
-                </td>
-                <td>
-                    <button th:attr="onclick='deleteById('+${facility.id}+',\''+${facility.name}+'\')'"
-                            type="button"
-                            class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Delete
-                    </button>
-                </td>
+                <th>STT</th>
+                <th>Facility Type</th>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Cost</th>
+                <th>Max People</th>
+                <th>Standard Room</th>
+                <th>Description Other Convenience</th>
+                <th>Pool Area</th>
+                <th>Number Of Floors</th>
+                <th>Facility Free</th>
+                <th>Rent Type</th>
+                <th colspan="2">Action</th>
             </tr>
-        </th:block>
-    </table>
-</div>
-<a th:href="@{/facility/(page=${facilityPage.number - 1},name=${name},facilityType=${facilityType})}"
-   th:if="${facilityPage.hasPrevious()}" class="btn btn-outline-success">Previous</a>
-<span th:text="${facilityPage.number + 1}+'/'+${facilityPage.totalPages}"></span>
-<a th:href="@{/facility/(page=${facilityPage.number + 1},name=${name},facilityType=${facilityType})}"
-   th:if="${facilityPage.hasNext()}"class="btn btn-outline-success">Next</a>
+            <th:block th:each="facility, varStatus : ${facilityPage}">
+                <tr>
+                    <td th:text="${varStatus.count}+${facilityPage.number}*${facilityPage.size}"></td>
+                    <td th:text="${facility.facilityType.name}"></td>
+                    <td th:text="${facility.name}"></td>
+                    <td th:text="${facility.area}"></td>
+                    <td th:text="${facility.cost}"></td>
+                    <td th:text="${facility.getmaxPeople()}"></td>
+                    <td th:text="${facility.standardRoom}"></td>
+                    <td th:text="${facility.descriptionOtherConvenience}"></td>
+                    <td th:text="${facility.poolArea}"></td>
+                    <td th:text="${facility.numberOfFloors}"></td>
+                    <td th:text="${facility.facilityFree}"></td>
+                    <td th:text="${facility.rentType.name}"></td>
+                    <td>
+                        <a th:href="@{/facility/edit(id=${facility.id})}" class="btn btn-outline-success">Edit</a>
+                    </td>
+                    <td>
+                        <button th:attr="onclick='deleteById('+${facility.id}+',\''+${facility.name}+'\')'"
+                                type="button"
+                                class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <a th:href="@{/facility/(page=${facilityPage.number - 1},name=${name},facilityType=${facilityType})}"
+       th:if="${facilityPage.hasPrevious()}" class="btn btn-outline-success">Previous</a>
+    <span th:text="${facilityPage.number + 1}+'/'+${facilityPage.totalPages}"></span>
+    <a th:href="@{/facility/(page=${facilityPage.number + 1},name=${name},facilityType=${facilityType})}"
+       th:if="${facilityPage.hasNext()}" class="btn btn-outline-success">Next</a>
 
-<!--modal-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+    <!--modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                 <span>
                     Bạn có muốn xóa:
                 </span>
-                <span style="color: #ff0000" id="deleteByName"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <form th:action="@{/facility/delete}" method="get">
-                    <input type="text" hidden id="deleteById" name="deleteById">
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                </form>
+                    <span style="color: #ff0000" id="deleteByName"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form th:action="@{/facility/delete}" method="get">
+                        <input type="text" hidden id="deleteById" name="deleteById">
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 <script th:inline="javascript">
     function deleteById(id, name) {
         console.log("deleteById" + id);

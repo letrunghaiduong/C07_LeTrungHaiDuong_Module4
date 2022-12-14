@@ -108,19 +108,49 @@
         crossorigin="anonymous"></script>
 <script>
 
-    $("#facilityTypes").change(function () {
-        if ($("#facilityTypes").val() == 1){
-            $("#facilityFrees").hide()
 
-        }else if ($("#facilityTypes").val() == 2){
-            $("#poolArea").hide()
-            $("#facilityFrees").hide()
-        }else if ($("#facilityTypes").val() == 3){
-            $("#poolArea").hide()
-            $("#numberOfFloors").hide()
+    $(document).ready(function () {
+        function init() {
+            if ($("#facilityTypes").val() == 1) {
+                $("#poolArea").show()
+                $("#numberOfFloors").show()
+                $("#descriptionOtherConvenience").show()
+                $("#facilityFrees").hide()
+            } else if ($("#facilityTypes").val() == 2) {
+                $("#poolArea").hide()
+                $("#numberOfFloors").show()
+                $("#descriptionOtherConvenience").show()
+                $("#facilityFrees").hide()
+            } else if ($("#facilityTypes").val() == 3) {
+                $("#poolArea").hide()
+                $("#numberOfFloors").hide()
+                $("#descriptionOtherConvenience").hide()
+                $("#facilityFrees").show()
+            }
         }
-    });
 
+        init()
+        $("#facilityTypes").change(function () {
+            if ($("#facilityTypes").val() == 1) {
+                $("#poolArea").show()
+                $("#numberOfFloors").show()
+                $("#descriptionOtherConvenience").show()
+                $("#facilityFrees").hide()
+            } else if ($("#facilityTypes").val() == 2) {
+                $("#poolArea").hide()
+                $("#numberOfFloors").show()
+                $("#descriptionOtherConvenience").show()
+                $("#facilityFrees").hide()
+            } else if ($("#facilityTypes").val() == 3) {
+                $("#poolArea").hide()
+                $("#numberOfFloors").hide()
+                $("#descriptionOtherConvenience").hide()
+                $("#facilityFrees").show()
+            }
+        });
+
+
+    })
 
 </script>
 </html>

@@ -5,10 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IFacilityService {
     Page<Facility> findAll(Pageable pageable);
+    List<Facility> findAll();
     Optional<Facility> findByTd(Long id);
     void save(Facility facility);
     void remove(Long id);
